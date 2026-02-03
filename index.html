@@ -4,6 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>La Cantine - Bussigny</title>
+    <meta name="description" content="La Cantine à Bussigny propose un repas solidaire mensuel pour réunir la communauté autour d'une cuisine du monde et soutenir l'entraide locale.">
+    <meta name="keywords" content="La Cantine, Bussigny, repas solidaire, cuisine du monde, association, bénévolat, réservation, menu du mois">
+    <meta name="author" content="La Cantine - Bussigny">
+    <meta property="og:title" content="La Cantine - Bussigny">
+    <meta property="og:description" content="Un repas solidaire mensuel à Bussigny : découvrez le menu, réservez votre table et soutenez l'entraide locale.">
+    <meta property="og:image" content="https://images.unsplash.com/photo-1511795409834-ef04bbd61622?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80">
+    <meta property="og:type" content="website">
+    <link rel="icon" href="https://images.unsplash.com/photo-1498837167922-ddd27525d352?ixlib=rb-4.0.3&auto=format&fit=crop&w=64&q=80" type="image/png">
     
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -12,6 +20,8 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
 
     <script>
@@ -20,7 +30,7 @@
                 extend: {
                     colors: {
                         cantine: {
-                            primary: '#D97706', // Ambre chaud
+                            primary: '#B45309', // Ambre chaud (contraste renforcé)
                             secondary: '#78350F', // Marron terre
                             light: '#FFFBEB', // Beige clair (pour le fond)
                             paper: '#FDFBF7', // Ivoire (pour le menu)
@@ -33,10 +43,28 @@
                         sans: ['Lato', 'sans-serif'],
                     }
                 }
-            }
+            },
+            content: ["./index.html"]
         }
     </script>
     
+    <style type="text/tailwindcss">
+        @layer components {
+            .form-input {
+                @apply w-full border border-gray-300 rounded-lg py-3 px-4 focus:outline-none focus:ring-2 focus:ring-cantine-primary;
+            }
+            .form-label {
+                @apply block text-sm font-bold text-gray-700 mb-2;
+            }
+            .mission-card {
+                @apply bg-stone-50 p-6 rounded-xl hover:shadow-lg transition border border-stone-100 text-center group;
+            }
+            .mission-card-icon {
+                @apply w-16 h-16 bg-white rounded-full flex items-center justify-center mx-auto mb-4 text-cantine-primary text-2xl shadow-sm group-hover:scale-110 transition;
+            }
+        }
+    </style>
+
     <style>
         .hero-bg {
             background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('https://images.unsplash.com/photo-1511795409834-ef04bbd61622?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80');
@@ -48,6 +76,14 @@
         }
         .hidden-section {
             display: none;
+        }
+        a:focus-visible,
+        button:focus-visible,
+        input:focus-visible,
+        select:focus-visible,
+        textarea:focus-visible {
+            outline: 3px solid #B45309;
+            outline-offset: 3px;
         }
         /* Motif Zellige simplifié en CSS pour les bordures du menu */
         .zellige-pattern {
@@ -96,7 +132,7 @@
             </div>
 
             <!-- Mobile Menu Button -->
-            <button class="xl:hidden text-gray-600 text-2xl" onclick="toggleMenu()">
+            <button class="xl:hidden text-gray-600 text-2xl" onclick="toggleMenu()" aria-label="Ouvrir le menu mobile">
                 <i class="fas fa-bars"></i>
             </button>
         </div>
@@ -317,21 +353,24 @@
                 </div>
 
                 <!-- Formulaire -->
-                <form id="reservation-form" onsubmit="handleReservation(event)" class="space-y-8">
+                <form id="reservation-form" onsubmit="handleReservation(event)" class="space-y-8" novalidate>
                     <div>
                         <h3 class="text-xl font-serif text-gray-800 border-b pb-2 mb-4">Vos Coordonnées</h3>
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                             <div>
-                                <label class="block text-sm font-bold text-gray-700 mb-2">Nom et Prénom <span class="text-red-500">*</span></label>
-                                <input type="text" required class="w-full border border-gray-300 rounded-lg py-3 px-4 focus:outline-none focus:ring-2 focus:ring-cantine-primary" placeholder="Jean Dupont">
+                                <label for="full-name" class="form-label">Nom et Prénom <span class="text-red-500">*</span></label>
+                                <input id="full-name" name="fullName" type="text" class="form-input" placeholder="Jean Dupont" data-required="true">
+                                <p id="error-full-name" class="text-sm text-red-600 mt-1 hidden">Merci d'indiquer votre nom complet.</p>
                             </div>
                             <div>
-                                <label class="block text-sm font-bold text-gray-700 mb-2">Adresse Email <span class="text-red-500">*</span></label>
-                                <input type="email" required class="w-full border border-gray-300 rounded-lg py-3 px-4 focus:outline-none focus:ring-2 focus:ring-cantine-primary" placeholder="jean@exemple.com">
+                                <label for="email" class="form-label">Adresse Email <span class="text-red-500">*</span></label>
+                                <input id="email" name="email" type="email" class="form-input" placeholder="jean@exemple.com" data-required="true">
+                                <p id="error-email" class="text-sm text-red-600 mt-1 hidden">Merci d'indiquer une adresse email valide.</p>
                             </div>
                             <div class="md:col-span-2">
-                                <label class="block text-sm font-bold text-gray-700 mb-2">Numéro de téléphone <span class="text-red-500">*</span></label>
-                                <input type="tel" required class="w-full border border-gray-300 rounded-lg py-3 px-4 focus:outline-none focus:ring-2 focus:ring-cantine-primary" placeholder="079 123 45 67">
+                                <label for="phone" class="form-label">Numéro de téléphone <span class="text-red-500">*</span></label>
+                                <input id="phone" name="phone" type="tel" class="form-input" placeholder="079 123 45 67" data-required="true">
+                                <p id="error-phone" class="text-sm text-red-600 mt-1 hidden">Merci d'indiquer un numéro de téléphone.</p>
                             </div>
                         </div>
                     </div>
@@ -340,18 +379,19 @@
                         <h3 class="text-xl font-serif text-gray-800 border-b pb-2 mb-4">Votre Réservation</h3>
                         <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
                             <div>
-                                <label class="block text-sm font-bold text-gray-700 mb-2">Date</label>
-                                <input type="text" value="Mercredi 4 février 2026" readonly class="w-full bg-gray-100 text-gray-600 border border-gray-300 rounded-lg py-3 px-4 cursor-not-allowed">
+                                <label for="date" class="form-label">Date</label>
+                                <input id="date" name="date" type="text" value="Mercredi 4 février 2026" readonly class="w-full bg-gray-100 text-gray-600 border border-gray-300 rounded-lg py-3 px-4 cursor-not-allowed">
                             </div>
                             <div>
-                                <label class="block text-sm font-bold text-gray-700 mb-2">Personnes <span class="text-red-500">*</span></label>
-                                <input type="number" min="1" max="20" value="1" required class="w-full border border-gray-300 rounded-lg py-3 px-4 focus:outline-none focus:ring-2 focus:ring-cantine-primary">
+                                <label for="guests" class="form-label">Personnes <span class="text-red-500">*</span></label>
+                                <input id="guests" name="guests" type="number" min="1" max="20" value="1" class="form-input" data-required="true">
+                                <p id="error-guests" class="text-sm text-red-600 mt-1 hidden">Merci d'indiquer un nombre de personnes.</p>
                             </div>
                             <div>
-                                <label class="block text-sm font-bold text-gray-700 mb-2">Arrivée <span class="text-red-500">*</span></label>
+                                <label for="arrival" class="form-label">Arrivée <span class="text-red-500">*</span></label>
                                 <div class="relative">
-                                    <select required class="w-full border border-gray-300 rounded-lg py-3 px-4 focus:outline-none focus:ring-2 focus:ring-cantine-primary appearance-none bg-white">
-                                        <option value="" disabled selected>Choisir l'heure</option>
+                                    <select id="arrival" name="arrival" class="w-full border border-gray-300 rounded-lg py-3 px-4 focus:outline-none focus:ring-2 focus:ring-cantine-primary appearance-none bg-white" data-required="true">
+                                        <option value="" selected>Choisir l'heure</option>
                                         <option value="11:45">11h45</option>
                                         <option value="12:00">12h00</option>
                                         <option value="12:15">12h15</option>
@@ -362,6 +402,7 @@
                                         <i class="fas fa-chevron-down text-xs"></i>
                                     </div>
                                 </div>
+                                <p id="error-arrival" class="text-sm text-red-600 mt-1 hidden">Merci de sélectionner une heure d'arrivée.</p>
                             </div>
                         </div>
                     </div>
@@ -370,12 +411,12 @@
                         <h3 class="text-xl font-serif text-gray-800 border-b pb-2 mb-4">Préférences & Remarques</h3>
                         <div class="space-y-4">
                             <div>
-                                <label class="block text-sm font-bold text-gray-700 mb-2">Régimes alimentaires ou allergies</label>
-                                <input type="text" class="w-full border border-gray-300 rounded-lg py-3 px-4 focus:outline-none focus:ring-2 focus:ring-cantine-primary" placeholder="Ex: Végétarien, sans gluten...">
+                                <label for="diet" class="form-label">Régimes alimentaires ou allergies</label>
+                                <input id="diet" name="diet" type="text" class="form-input" placeholder="Ex: Végétarien, sans gluten...">
                             </div>
                             <div>
-                                <label class="block text-sm font-bold text-gray-700 mb-2">Remarque pour l'équipe</label>
-                                <textarea rows="2" class="w-full border border-gray-300 rounded-lg py-3 px-4 focus:outline-none focus:ring-2 focus:ring-cantine-primary" placeholder="Ex: Besoin d'une chaise haute..."></textarea>
+                                <label for="note" class="form-label">Remarque pour l'équipe</label>
+                                <textarea id="note" name="note" rows="2" class="form-input" placeholder="Ex: Besoin d'une chaise haute..."></textarea>
                             </div>
                         </div>
                     </div>
@@ -412,7 +453,10 @@
                         <div class="absolute top-4 left-4 w-full h-full border-2 border-cantine-primary rounded-2xl z-0"></div>
                         <img src="https://images.unsplash.com/photo-1593113598332-cd288d649433?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" 
                              alt="Distribution alimentaire et bénévoles" 
-                             class="relative z-10 rounded-2xl shadow-xl w-full">
+                             class="relative z-10 rounded-2xl shadow-xl w-full"
+                             loading="lazy"
+                             width="1000"
+                             height="667">
                     </div>
                 </div>
             </div>
@@ -436,8 +480,8 @@
             <!-- Grille Missions -->
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-16">
                 <!-- Mission 1 -->
-                <div class="bg-stone-50 p-6 rounded-xl hover:shadow-lg transition border border-stone-100 text-center group">
-                    <div class="w-16 h-16 bg-white rounded-full flex items-center justify-center mx-auto mb-4 text-cantine-primary text-2xl shadow-sm group-hover:scale-110 transition">
+                <div class="mission-card">
+                    <div class="mission-card-icon">
                         <i class="fas fa-star"></i>
                     </div>
                     <h3 class="font-bold text-xl text-gray-800 mb-3">L'As des fourneaux</h3>
@@ -446,8 +490,8 @@
                     </p>
                 </div>
                 <!-- Mission 2 -->
-                <div class="bg-stone-50 p-6 rounded-xl hover:shadow-lg transition border border-stone-100 text-center group">
-                    <div class="w-16 h-16 bg-white rounded-full flex items-center justify-center mx-auto mb-4 text-cantine-primary text-2xl shadow-sm group-hover:scale-110 transition">
+                <div class="mission-card">
+                    <div class="mission-card-icon">
                         <i class="fas fa-carrot"></i>
                     </div>
                     <h3 class="font-bold text-xl text-gray-800 mb-3">Le Commis motivé</h3>
@@ -456,8 +500,8 @@
                     </p>
                 </div>
                 <!-- Mission 3 -->
-                <div class="bg-stone-50 p-6 rounded-xl hover:shadow-lg transition border border-stone-100 text-center group">
-                    <div class="w-16 h-16 bg-white rounded-full flex items-center justify-center mx-auto mb-4 text-cantine-primary text-2xl shadow-sm group-hover:scale-110 transition">
+                <div class="mission-card">
+                    <div class="mission-card-icon">
                         <i class="fas fa-heart"></i>
                     </div>
                     <h3 class="font-bold text-xl text-gray-800 mb-3">L'Accueil</h3>
@@ -466,8 +510,8 @@
                     </p>
                 </div>
                 <!-- Mission 4 -->
-                <div class="bg-stone-50 p-6 rounded-xl hover:shadow-lg transition border border-stone-100 text-center group">
-                    <div class="w-16 h-16 bg-white rounded-full flex items-center justify-center mx-auto mb-4 text-cantine-primary text-2xl shadow-sm group-hover:scale-110 transition">
+                <div class="mission-card">
+                    <div class="mission-card-icon">
                         <i class="fas fa-people-carry-box"></i>
                     </div>
                     <h3 class="font-bold text-xl text-gray-800 mb-3">La Logistique</h3>
@@ -573,8 +617,8 @@
                     <h3 class="text-white font-bold text-lg mb-6">Liens Rapides</h3>
                     <ul class="flex flex-col gap-2 text-sm">
                         <li><a href="#benevole" class="hover:text-cantine-primary transition">Devenir Bénévoles</a></li>
-                        <li><a href="#" class="hover:text-cantine-primary transition">Mentions Légales</a></li>
-                        <li><a href="#" class="hover:text-cantine-primary transition">Politique de Confidentialité</a></li>
+                        <li><button type="button" class="hover:text-cantine-primary transition text-left" data-modal-target="legal-modal">Mentions Légales</button></li>
+                        <li><button type="button" class="hover:text-cantine-primary transition text-left" data-modal-target="privacy-modal">Politique de Confidentialité</button></li>
                     </ul>
                 </div>
             </div>
@@ -585,46 +629,60 @@
         </div>
     </footer>
 
-    <script>
-        // Gestion du menu mobile
-        function toggleMenu() {
-            const menu = document.getElementById('mobile-menu');
-            menu.classList.toggle('hidden');
-        }
+    <!-- Bouton retour en haut -->
+    <button id="back-to-top" class="hidden fixed bottom-6 right-6 bg-cantine-primary text-white rounded-full w-12 h-12 shadow-lg hover:bg-orange-700 transition items-center justify-center" aria-label="Retour en haut">
+        <i class="fas fa-arrow-up"></i>
+    </button>
 
-        // Gestion de la réservation
-        function handleReservation(event) {
-            event.preventDefault();
-            const form = document.getElementById('reservation-form');
-            const successMsg = document.getElementById('reservation-success');
+    <!-- Modale Mentions Légales -->
+    <div id="legal-modal" class="hidden-section fixed inset-0 z-50" role="dialog" aria-modal="true" aria-labelledby="legal-title">
+        <div class="absolute inset-0 bg-black/60" data-modal-overlay></div>
+        <div class="relative bg-white max-w-2xl mx-auto mt-24 p-8 rounded-2xl shadow-xl">
+            <div class="flex items-start justify-between gap-4 mb-4">
+                <h3 id="legal-title" class="text-2xl font-serif text-cantine-secondary">Mentions Légales</h3>
+                <button type="button" class="text-gray-500 hover:text-gray-700" data-modal-close aria-label="Fermer la modale">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="space-y-4 text-gray-600 text-sm leading-relaxed">
+                <p><strong>Éditeur :</strong> Association La Cantine, Rue de Lausanne 3, 1030 Bussigny, Suisse.</p>
+                <p><strong>Contact :</strong> lacantine.bussigny@gmail.ch • +41 77 473 73 64.</p>
+                <p><strong>Directrice de publication :</strong> L'équipe de La Cantine.</p>
+                <p><strong>Hébergement :</strong> Site hébergé par un prestataire externe.</p>
+            </div>
+        </div>
+    </div>
 
-            form.style.opacity = '0';
-            setTimeout(() => {
-                form.classList.add('hidden-section');
-                successMsg.classList.remove('hidden-section');
-                successMsg.style.opacity = '0';
-                
-                document.getElementById('reservation').scrollIntoView({ behavior: 'smooth' });
+    <!-- Modale Politique de Confidentialité -->
+    <div id="privacy-modal" class="hidden-section fixed inset-0 z-50" role="dialog" aria-modal="true" aria-labelledby="privacy-title">
+        <div class="absolute inset-0 bg-black/60" data-modal-overlay></div>
+        <div class="relative bg-white max-w-2xl mx-auto mt-24 p-8 rounded-2xl shadow-xl">
+            <div class="flex items-start justify-between gap-4 mb-4">
+                <h3 id="privacy-title" class="text-2xl font-serif text-cantine-secondary">Politique de Confidentialité</h3>
+                <button type="button" class="text-gray-500 hover:text-gray-700" data-modal-close aria-label="Fermer la modale">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="space-y-4 text-gray-600 text-sm leading-relaxed">
+                <p>Nous collectons uniquement les données nécessaires à la gestion des réservations (nom, email, téléphone, préférences).</p>
+                <p>Ces informations sont utilisées pour confirmer votre venue et ne sont jamais revendues.</p>
+                <p>Vous pouvez demander la suppression de vos données à tout moment via lacantine.bussigny@gmail.ch.</p>
+            </div>
+        </div>
+    </div>
 
-                setTimeout(() => {
-                    successMsg.style.transition = 'opacity 0.5s';
-                    successMsg.style.opacity = '1';
-                }, 50);
-            }, 300);
-        }
+    <!-- Bannière cookies -->
+    <div id="cookie-banner" class="fixed bottom-0 inset-x-0 bg-white border-t border-gray-200 shadow-lg p-4 z-40">
+        <div class="container mx-auto px-4 flex flex-col md:flex-row items-start md:items-center justify-between gap-4 text-sm text-gray-600">
+            <p>
+                Nous utilisons des cookies pour améliorer votre expérience et mesurer l'audience du site.
+            </p>
+            <button id="accept-cookies" class="bg-cantine-primary text-white font-bold py-2 px-4 rounded-full hover:bg-orange-700 transition">
+                Accepter
+            </button>
+        </div>
+    </div>
 
-        function resetForm() {
-            const form = document.getElementById('reservation-form');
-            const successMsg = document.getElementById('reservation-success');
-            
-            form.reset();
-            successMsg.classList.add('hidden-section');
-            form.classList.remove('hidden-section');
-            setTimeout(() => {
-                form.style.transition = 'opacity 0.5s';
-                form.style.opacity = '1';
-            }, 50);
-        }
-    </script>
+    <script src="app.js"></script>
 </body>
 </html>

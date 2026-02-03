@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact & Réservation - La Cantine</title>
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header>
+        <nav class="navbar">
+            <div class="logo">La Cantine</div>
+            <ul class="nav-links">
+                <li><a href="index.html">Accueil</a></li>
+                <li><a href="agenda.html">Agenda & Menus</a></li>
+                <li><a href="mission.html">Notre Mission</a></li>
+                <li><a href="benevole.html">Bénévolat</a></li>
+                <li><a href="contact.html" class="active">Contact</a></li>
+                <li><a href="contact.html#reservation" class="btn-reserve">Réserver</a></li>
+            </ul>
+            <div class="burger">
+                <div class="line1"></div>
+                <div class="line2"></div>
+                <div class="line3"></div>
+            </div>
+        </nav>
+    </header>
+
+    <section class="container">
+        <h1>Nous trouver</h1>
+        <p><strong>Adresse :</strong> Rue de Lausanne 3, Bussigny (Salle du Raisin)</p>
+        <p><strong>Téléphone :</strong> 077 473 73 64</p>
+        <p><strong>Email :</strong> lacantine.bussigny@gmail.ch</p>
+        
+        <div style="background-color: #ddd; height: 300px; width: 100%; display: flex; align-items: center; justify-content: center; margin-top: 20px; border-radius: 8px;">
+            <p>Carte Google Maps ici</p>
+        </div>
+    </section>
+
+    <section id="reservation" class="container" style="background-color: white;">
+        <h2>Réserver une table</h2>
+        <p>Pour le repas du Mercredi 4 Février (Algérie).</p>
+        <br>
+        <form id="reservationForm">
+            <label>Nom & Prénom</label>
+            <input type="text" placeholder="Votre nom complet" required>
+            
+            <label>Email</label>
+            <input type="email" placeholder="votre@email.com" required>
+
+            <label>Nombre de personnes</label>
+            <input type="number" min="1" max="10" value="1" required>
+
+            <label>Heure d'arrivée souhaitée</label>
+            <select>
+                <option>11h45</option>
+                <option>12h00</option>
+                <option>12h15</option>
+                <option>12h30</option>
+            </select>
+
+            <label>Remarques (Allergies, etc.)</label>
+            <textarea rows="3" placeholder="Végétarien, allergies..."></textarea>
+
+            <button type="submit">Confirmer la réservation</button>
+        </form>
+    </section>
+
+    <footer>
+        <p>La Cantine Bussigny - Rue de Lausanne 3</p>
+        <small>&copy; 2026 La Cantine.</small>
+    </footer>
+
+    <script src="app.js"></script>
+</body>
+</html>

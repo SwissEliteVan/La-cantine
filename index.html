@@ -1,74 +1,198 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>La Cantine Bussigny | Cuisine du Monde & Solidaire</title>
-    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>La Cantine Bussigny - Repas communautaires</title>
+  <meta name="description" content="La Cantine Bussigny organise des repas communautaires solidaires. Découvrez le menu, l'agenda et réservez votre place.">
+  <meta name="keywords" content="La Cantine Bussigny, repas communautaires, association, solidarité, réservation">
+  <meta name="author" content="La Cantine Bussigny">
+  <meta property="og:title" content="La Cantine Bussigny - Repas communautaires">
+  <meta property="og:description" content="Repas communautaires solidaires à Bussigny. Réservez votre place et soutenez nos actions locales.">
+  <meta property="og:image" content="https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=1200&q=80">
+  <meta property="og:type" content="website">
+  <link rel="manifest" href="manifest.json">
+  <link rel="icon" href="https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=64&q=80" type="image/png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&family=Playfair+Display:wght@500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="logo" href="#accueil">La Cantine</a>
+      <button class="burger" type="button" aria-label="Ouvrir le menu" aria-expanded="false" aria-controls="primary-nav">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+      <nav id="primary-nav" class="nav">
+        <a href="#accueil">Accueil</a>
+        <a href="#agenda">Agenda</a>
+        <a href="#mission">Mission</a>
+        <a href="#avis">Avis</a>
+        <a href="#benevolat">Bénévolat</a>
+        <a href="#reserver">Réserver</a>
+      </nav>
+    </div>
+  </header>
 
-    <header>
-        <nav class="navbar">
-            <div class="logo">La Cantine</div>
-            <ul class="nav-links">
-                <li><a href="index.html" class="active">Accueil</a></li>
-                <li><a href="agenda.html">Agenda & Menus</a></li>
-                <li><a href="mission.html">Notre Mission</a></li>
-                <li><a href="benevole.html">Bénévolat</a></li>
-                <li><a href="contact.html">Contact</a></li>
-                <li><a href="contact.html#reservation" class="btn-reserve">Réserver</a></li>
-            </ul>
-            <div class="burger">
-                <div class="line1"></div>
-                <div class="line2"></div>
-                <div class="line3"></div>
-            </div>
-        </nav>
-    </header>
-
-    <section class="hero">
-        <div class="hero-content">
-            <h1>Le monde dans votre assiette, la solidarité au cœur.</h1>
-            <p>Chaque 1er mercredi du mois, découvrez une cuisine authentique à la Salle du Raisin. Prochain départ : Algérie.</p>
-            <a href="contact.html#reservation" class="btn-hero">Réserver pour le 4 Février</a>
-        </div>
+  <main>
+    <section id="accueil" class="hero">
+      <div class="hero-overlay"></div>
+      <div class="container hero-content">
+        <h1>Le monde dans votre assiette, la solidarité au cœur de Bussigny.</h1>
+        <p>Chaque premier mercredi du mois, La Cantine Bussigny propose un repas communautaire chaleureux, à prix libre et conscient.</p>
+        <a class="button" href="#reserver">Réserver une table</a>
+      </div>
     </section>
 
-    <section class="container">
-        <h2>À l'affiche : Mercredi 4 Février 2026</h2>
-        <div class="card-grid">
-            <div class="card">
-                <img src="https://images.unsplash.com/photo-1585937421612-70a008356f36?auto=format&fit=crop&w=600&q=80" alt="Cuisine Algérienne">
-            </div>
-            <div class="card-content">
-                <span class="card-date">Menu Spécial</span>
-                <h3>Destination Algérie</h3>
-                <p>Pour ce premier rendez-vous de l'année, Nina et l'équipe vous proposent un <strong>Berkoukes traditionnel</strong> (plombs aux légumes et viande mijotée) suivi de douceurs orientales.</p>
-                <br>
-                <p><strong>Lieu :</strong> Salle du Raisin, Bussigny</p>
-                <p><strong>Service :</strong> Midi uniquement</p>
-            </div>
+    <section id="agenda" class="section">
+      <div class="container">
+        <div class="section-heading">
+          <h2>Agenda des repas</h2>
+          <p>Prix libre et conscient (15-20 CHF) - Cash ou Twint.</p>
         </div>
+        <div class="cards">
+          <article class="card highlight">
+            <h3>Mercredi 4 février</h3>
+            <p class="card-status">Ouvert aux réservations</p>
+            <p><strong>Destination :</strong> Algérie</p>
+            <p><strong>Plat :</strong> Berkoukes traditionnel</p>
+          </article>
+          <article class="card muted">
+            <h3>Mercredi 4 mars</h3>
+            <p class="card-status">Bientôt</p>
+            <p>Programme en préparation.</p>
+          </article>
+          <article class="card muted">
+            <h3>Mercredi 1er avril</h3>
+            <p class="card-status">Bientôt</p>
+            <p>Programme en préparation.</p>
+          </article>
+        </div>
+      </div>
     </section>
 
-    <section class="container" style="background-color: #fff;">
-        <div style="text-align: center;">
-            <h2>Manger utile</h2>
-            <p>100% des bénéfices financent nos distributions alimentaires et le Noël des bénéficiaires.</p>
-            <br>
-            <a href="mission.html" style="color: var(--color-primary); font-weight: bold;">En savoir plus sur notre impact &rarr;</a>
+    <section id="mission" class="section alt">
+      <div class="container">
+        <div class="section-heading">
+          <h2>Notre mission</h2>
+          <p>Un repas partagé qui finance des actions locales et renforce le lien social.</p>
         </div>
+        <div class="cards">
+          <article class="card">
+            <h3>Aide alimentaire</h3>
+            <p>Les bénéfices soutiennent directement nos distributions mensuelles.</p>
+          </article>
+          <article class="card">
+            <h3>Noël solidaire</h3>
+            <p>Chaque année, nous organisons un repas festif pour les familles locales.</p>
+          </article>
+          <article class="card">
+            <h3>Lien social</h3>
+            <p>La Cantine est un lieu de rencontres intergénérationnelles et inclusives.</p>
+          </article>
+        </div>
+      </div>
     </section>
 
-    <footer>
-        <p>La Cantine Bussigny - Rue de Lausanne 3</p>
-        <p>077 473 73 64 | lacantine.bussigny@gmail.ch</p>
-        <br>
-        <small>&copy; 2026 La Cantine. Tous droits réservés.</small>
-    </footer>
+    <section id="avis" class="section">
+      <div class="container">
+        <div class="section-heading">
+          <h2>Avis des convives</h2>
+          <p>Recommandé par 100% des visiteurs.</p>
+        </div>
+        <div class="testimonial">
+          <p>"Merci pour ce savoureux repas, le service impeccable et la bonne humeur. À très vite pour de nouvelles découvertes gastronomiques."</p>
+          <span>Aitor Ibarrola</span>
+        </div>
+      </div>
+    </section>
 
-    <script src="app.js"></script>
+    <section id="benevolat" class="section alt">
+      <div class="container">
+        <div class="section-heading">
+          <h2>Devenir bénévole</h2>
+          <p>Votre engagement fait la différence lors de chaque repas.</p>
+        </div>
+        <div class="cards">
+          <article class="card">
+            <h3>Cuisine</h3>
+            <p>Préparation du menu avec l'équipe et transmission des recettes.</p>
+          </article>
+          <article class="card">
+            <h3>Service</h3>
+            <p>Accueil des convives, service en salle et convivialité.</p>
+          </article>
+          <article class="card">
+            <h3>Logistique</h3>
+            <p>Installation, rangement et coordination des espaces.</p>
+          </article>
+        </div>
+        <a class="button ghost" href="mailto:lacantine.bussigny@gmail.ch">Écrire à l'équipe</a>
+      </div>
+    </section>
+
+    <section id="reserver" class="section">
+      <div class="container">
+        <div class="section-heading">
+          <h2>Réserver une table</h2>
+          <p>Les réservations aident à prévoir les quantités et limiter le gaspillage.</p>
+        </div>
+        <div class="contact-grid">
+          <div class="contact-info">
+            <h3>Coordonnées</h3>
+            <p>La Cantine Bussigny</p>
+            <p>Rue de Lausanne 3, 1030 Bussigny, Suisse</p>
+            <p>Téléphone : 077 473 73 64</p>
+            <p>Email : lacantine.bussigny@gmail.ch</p>
+            <p>Paiement sur place : Cash ou Twint</p>
+            <div class="map-wrapper">
+              <iframe title="Carte La Cantine Bussigny" src="https://www.google.com/maps?q=Rue%20de%20Lausanne%203%201030%20Bussigny&output=embed" loading="lazy"></iframe>
+            </div>
+          </div>
+          <form class="contact-form" action="https://formsubmit.co/lacantine.bussigny@gmail.ch" method="POST">
+            <input type="hidden" name="_next" value="https://lacantine-bussigny.github.io/merci.html">
+            <input type="hidden" name="_captcha" value="false">
+            <input type="text" name="_honey" class="hidden" tabindex="-1" autocomplete="off">
+
+            <label for="name">Nom et prénom</label>
+            <input id="name" name="name" type="text" required>
+
+            <label for="email">Email</label>
+            <input id="email" name="email" type="email" required>
+
+            <label for="phone">Téléphone</label>
+            <input id="phone" name="phone" type="tel" required>
+
+            <label for="guests">Nombre de personnes</label>
+            <input id="guests" name="guests" type="number" min="1" max="20" required>
+
+            <label for="note">Remarques</label>
+            <textarea id="note" name="note" rows="4"></textarea>
+
+            <button class="button" type="submit">Envoyer la réservation</button>
+          </form>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <div>
+        <p>La Cantine Bussigny</p>
+        <p>Association culinaire et solidaire.</p>
+      </div>
+      <div class="footer-links">
+        <a href="legales.html">Mentions légales</a>
+        <span>Copyright 2026</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="app.js"></script>
 </body>
 </html>

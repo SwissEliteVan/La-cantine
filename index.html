@@ -1,630 +1,198 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>La Cantine - Bussigny</title>
-    
-    <!-- Tailwind CSS -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    
-    <!-- Font Awesome pour les icônes (Pas d'emojis) -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
-    <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
-
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        cantine: {
-                            primary: '#D97706', // Ambre chaud
-                            secondary: '#78350F', // Marron terre
-                            light: '#FFFBEB', // Beige clair (pour le fond)
-                            paper: '#FDFBF7', // Ivoire (pour le menu)
-                            dark: '#1F2937',
-                            success: '#15803d'
-                        }
-                    },
-                    fontFamily: {
-                        serif: ['"DM Serif Display"', 'serif'],
-                        sans: ['Lato', 'sans-serif'],
-                    }
-                }
-            }
-        }
-    </script>
-    
-    <style>
-        .hero-bg {
-            background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('https://images.unsplash.com/photo-1511795409834-ef04bbd61622?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80');
-            background-size: cover;
-            background-position: center;
-        }
-        html {
-            scroll-behavior: smooth;
-        }
-        .hidden-section {
-            display: none;
-        }
-        /* Motif Zellige simplifié en CSS pour les bordures du menu */
-        .zellige-pattern {
-            background-color: #D97706;
-            background-image: 
-                linear-gradient(45deg, #78350F 25%, transparent 25%, transparent 75%, #78350F 75%, #78350F),
-                linear-gradient(45deg, #78350F 25%, transparent 25%, transparent 75%, #78350F 75%, #78350F);
-            background-position: 0 0, 10px 10px;
-            background-size: 20px 20px;
-            opacity: 0.2;
-        }
-        /* Effet papier texturé */
-        .paper-texture {
-            background-color: #FDFBF7;
-            background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23d97706' fill-opacity='0.03'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' /%3E%3C/g%3E%3C/svg%3E");
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>La Cantine Bussigny - Repas communautaires</title>
+  <meta name="description" content="La Cantine Bussigny organise des repas communautaires solidaires. Découvrez le menu, l'agenda et réservez votre place.">
+  <meta name="keywords" content="La Cantine Bussigny, repas communautaires, association, solidarité, réservation">
+  <meta name="author" content="La Cantine Bussigny">
+  <meta property="og:title" content="La Cantine Bussigny - Repas communautaires">
+  <meta property="og:description" content="Repas communautaires solidaires à Bussigny. Réservez votre place et soutenez nos actions locales.">
+  <meta property="og:image" content="https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=1200&q=80">
+  <meta property="og:type" content="website">
+  <link rel="manifest" href="manifest.json">
+  <link rel="icon" href="https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=64&q=80" type="image/png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&family=Playfair+Display:wght@500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
 </head>
-<body class="font-sans text-gray-700 bg-stone-50">
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="logo" href="#accueil">La Cantine</a>
+      <button class="burger" type="button" aria-label="Ouvrir le menu" aria-expanded="false" aria-controls="primary-nav">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+      <nav id="primary-nav" class="nav">
+        <a href="#accueil">Accueil</a>
+        <a href="#agenda">Agenda</a>
+        <a href="#mission">Mission</a>
+        <a href="#avis">Avis</a>
+        <a href="#benevolat">Bénévolat</a>
+        <a href="#reserver">Réserver</a>
+      </nav>
+    </div>
+  </header>
 
-    <!-- 1. En-tête de navigation -->
-    <header class="bg-white shadow-md fixed w-full z-50">
-        <div class="container mx-auto px-4 py-3 flex justify-between items-center">
-            <!-- Logo -->
-            <a href="#" class="flex items-center gap-2 text-2xl font-serif text-cantine-secondary font-bold">
-                <i class="fas fa-utensils text-cantine-primary"></i>
-                La Cantine
-            </a>
-
-            <!-- Menu Desktop -->
-            <nav class="hidden xl:flex gap-6 font-medium text-gray-600">
-                <a href="#accueil" class="hover:text-cantine-primary transition">Accueil</a>
-                <a href="#agenda" class="hover:text-cantine-primary transition">L'Agenda</a>
-                <a href="#menu-du-mois" class="hover:text-cantine-primary transition font-bold text-cantine-secondary">Le Menu</a>
-                <a href="#reservation" class="hover:text-cantine-primary transition">Réserver</a>
-                <a href="#mission" class="hover:text-cantine-primary transition">Notre Mission</a>
-                <a href="#benevole" class="hover:text-cantine-primary transition">Bénévolat</a>
-                <a href="#contact" class="hover:text-cantine-primary transition">Contact</a>
-            </nav>
-
-            <!-- Bouton Principal -->
-            <div class="hidden xl:block">
-                <a href="#reservation" class="bg-cantine-primary hover:bg-orange-700 text-white font-bold py-2 px-6 rounded-full transition shadow-lg transform hover:scale-105">
-                    Réserver une table
-                </a>
-            </div>
-
-            <!-- Mobile Menu Button -->
-            <button class="xl:hidden text-gray-600 text-2xl" onclick="toggleMenu()">
-                <i class="fas fa-bars"></i>
-            </button>
-        </div>
-
-        <!-- Mobile Menu Panel -->
-        <div id="mobile-menu" class="hidden xl:hidden bg-white border-t p-4 flex flex-col gap-4 shadow-lg fixed w-full z-40 top-[60px]">
-            <a href="#accueil" class="block py-2 hover:text-cantine-primary">Accueil</a>
-            <a href="#agenda" class="block py-2 hover:text-cantine-primary">L'Agenda</a>
-            <a href="#menu-du-mois" class="block py-2 hover:text-cantine-primary font-bold">Le Menu</a>
-            <a href="#reservation" class="block py-2 hover:text-cantine-primary">Réserver</a>
-            <a href="#mission" class="block py-2 hover:text-cantine-primary">Notre Mission</a>
-            <a href="#benevole" class="block py-2 hover:text-cantine-primary">Devenir Bénévole</a>
-            <a href="#contact" class="block py-2 hover:text-cantine-primary">Contact</a>
-        </div>
-    </header>
-
-    <!-- 2. Section Héro -->
-    <section id="accueil" class="hero-bg h-screen flex items-center justify-center text-center text-white px-4 pt-16">
-        <div class="max-w-4xl mx-auto">
-            <h1 class="text-4xl md:text-6xl font-serif mb-6 leading-tight">
-                Le monde dans votre assiette,<br>la solidarité au cœur de Bussigny.
-            </h1>
-            <p class="text-lg md:text-xl mb-10 text-gray-100 max-w-2xl mx-auto leading-relaxed">
-                Chaque premier mercredi du mois, La Cantine vous invite à un voyage culinaire unique. 
-                Venez partager un repas convivial et soutenez nos actions locales.
-            </p>
-            <div class="flex flex-col sm:flex-row justify-center gap-4">
-                <a href="#menu-du-mois" class="bg-white text-cantine-secondary font-bold py-3 px-8 rounded-full hover:bg-gray-100 transition shadow-lg">
-                    Découvrir le menu
-                </a>
-                <a href="#reservation" class="bg-cantine-primary text-white font-bold py-3 px-8 rounded-full hover:bg-orange-700 transition shadow-lg">
-                    Réserver maintenant
-                </a>
-            </div>
-        </div>
+  <main>
+    <section id="accueil" class="hero">
+      <div class="hero-overlay"></div>
+      <div class="container hero-content">
+        <h1>Le monde dans votre assiette, la solidarité au cœur de Bussigny.</h1>
+        <p>Chaque premier mercredi du mois, La Cantine Bussigny propose un repas communautaire chaleureux, à prix libre et conscient.</p>
+        <a class="button" href="#reserver">Réserver une table</a>
+      </div>
     </section>
 
-    <!-- 3. Section Agenda (Résumé) -->
-    <section id="agenda" class="py-16 container mx-auto px-4">
-        <div class="flex flex-col items-center text-center mb-12">
-            <span class="text-cantine-primary font-bold uppercase tracking-widest text-sm mb-2">Prochain Départ</span>
-            <h2 class="text-3xl md:text-4xl font-serif text-cantine-secondary">Mercredi 4 février</h2>
-            <div class="h-1 w-20 bg-cantine-primary mt-4"></div>
+    <section id="agenda" class="section">
+      <div class="container">
+        <div class="section-heading">
+          <h2>Agenda des repas</h2>
+          <p>Prix libre et conscient (15-20 CHF) - Cash ou Twint.</p>
         </div>
+        <div class="cards">
+          <article class="card highlight">
+            <h3>Mercredi 4 février</h3>
+            <p class="card-status">Ouvert aux réservations</p>
+            <p><strong>Destination :</strong> Algérie</p>
+            <p><strong>Plat :</strong> Berkoukes traditionnel</p>
+          </article>
+          <article class="card muted">
+            <h3>Mercredi 4 mars</h3>
+            <p class="card-status">Bientôt</p>
+            <p>Programme en préparation.</p>
+          </article>
+          <article class="card muted">
+            <h3>Mercredi 1er avril</h3>
+            <p class="card-status">Bientôt</p>
+            <p>Programme en préparation.</p>
+          </article>
+        </div>
+      </div>
     </section>
 
-    <!-- 4. NOUVELLE SECTION: LE MENU & FIDÉLISATION -->
-    <section id="menu-du-mois" class="pb-20 bg-stone-100">
-        <div class="container mx-auto px-4">
-            <div class="flex flex-col lg:flex-row gap-12 justify-center items-start">
-                
-                <!-- LE MENU (Format Papier) -->
-                <div class="w-full lg:w-1/2 max-w-xl mx-auto paper-texture shadow-2xl relative transform hover:-translate-y-1 transition duration-500">
-                    <!-- Bordure Haut (Zellige) -->
-                    <div class="h-6 w-full zellige-pattern"></div>
-                    
-                    <div class="p-8 md:p-12 text-center border-l-8 border-r-8 border-transparent">
-                        <!-- En-tête Menu -->
-                        <div class="mb-8">
-                            <div class="text-xs uppercase tracking-widest text-gray-500 mb-2">La Cantine de Bussigny</div>
-                            <div class="text-sm font-bold text-gray-800">Salle du Raisin</div>
-                            <div class="text-sm text-gray-600">Mercredi 4 Février 2026</div>
-                        </div>
-
-                        <!-- Titre Menu -->
-                        <div class="mb-10 relative">
-                            <span class="block text-4xl md:text-5xl font-serif text-cantine-secondary leading-tight">Escale en Algérie</span>
-                            <div class="w-16 h-0.5 bg-cantine-primary mx-auto mt-4"></div>
-                        </div>
-
-                        <!-- Intro -->
-                        <p class="text-gray-600 italic mb-10 font-serif leading-relaxed">
-                            Aujourd'hui, Nina et toute l'équipe vous proposent un voyage culinaire au cœur du Maghreb, mijoté avec passion.
-                        </p>
-
-                        <!-- Plats -->
-                        <div class="space-y-10">
-                            <!-- Entrée -->
-                            <div>
-                                <h3 class="text-xl font-bold font-serif text-cantine-secondary mb-2 uppercase tracking-wide">L'Entrée</h3>
-                                <div class="text-lg font-bold text-gray-800 mb-1">Salade Méchouia & Bourek Croustillant</div>
-                                <p class="text-gray-600 text-sm">Duo de poivrons grillés marinés à l'huile d'olive et cigare feuilleté aux légumes.</p>
-                            </div>
-
-                            <!-- Plat -->
-                            <div class="relative">
-                                <div class="absolute -left-4 top-0 bottom-0 w-0.5 bg-gray-200 hidden md:block"></div>
-                                <div class="absolute -right-4 top-0 bottom-0 w-0.5 bg-gray-200 hidden md:block"></div>
-                                <h3 class="text-2xl font-bold font-serif text-cantine-primary mb-2 uppercase tracking-wide">Le Plat de Résistance</h3>
-                                <div class="text-xl font-bold text-gray-800 mb-2">Le Berkoukes Traditionnel</div>
-                                <p class="text-gray-600 leading-relaxed">
-                                    La star du jour. Un plat généreux de "plombs" (pâtes artisanales) cuisinés en sauce rouge, accompagnés de légumes de saison et de viande mijotée.
-                                </p>
-                                <p class="text-xs text-cantine-success mt-2 italic">(Version végétarienne disponible sur demande)</p>
-                            </div>
-
-                            <!-- Dessert -->
-                            <div>
-                                <h3 class="text-xl font-bold font-serif text-cantine-secondary mb-2 uppercase tracking-wide">Le Dessert</h3>
-                                <div class="text-lg font-bold text-gray-800 mb-1">Douceurs d'Orient</div>
-                                <p class="text-gray-600 text-sm">Pâtisserie maison au miel et aux amandes, servie avec un thé à la menthe fraîche.</p>
-                            </div>
-                        </div>
-
-                        <!-- Boissons -->
-                        <div class="mt-12 pt-8 border-t border-dashed border-gray-300">
-                            <h4 class="text-sm font-bold uppercase text-gray-500 mb-2">Boissons</h4>
-                            <p class="text-gray-600 text-sm">Eau minérale, Jus de fruits, Café</p>
-                        </div>
-
-                        <!-- Pied de page Menu -->
-                        <div class="mt-12 text-cantine-secondary font-serif italic text-lg">
-                            Bon appétit !<br>
-                            <span class="text-sm not-italic text-gray-500 font-sans">Prochain départ : Mercredi 4 mars 2026</span>
-                        </div>
-                    </div>
-
-                    <!-- Bordure Bas (Zellige) -->
-                    <div class="h-6 w-full zellige-pattern"></div>
-                </div>
-
-                <!-- CARTE CAVALIER (Marketing & Agenda) -->
-                <div class="w-full lg:w-1/3 flex flex-col gap-6">
-                    
-                    <!-- Face A: Agenda -->
-                    <div class="bg-white rounded-xl shadow-lg p-8 border-t-4 border-cantine-secondary">
-                        <div class="flex items-center gap-3 mb-6">
-                            <i class="far fa-calendar-check text-2xl text-cantine-secondary"></i>
-                            <h3 class="text-xl font-bold font-serif text-gray-800">À vos agendas !</h3>
-                        </div>
-                        <p class="text-gray-600 mb-6 text-sm">Ne manquez pas nos prochaines escales gourmandes. Toujours le 1er mercredi du mois.</p>
-                        
-                        <ul class="space-y-4">
-                            <li class="flex items-start gap-4 pb-4 border-b border-gray-100 last:border-0">
-                                <div class="font-bold text-cantine-primary w-16 text-right">4 Mars</div>
-                                <div class="text-gray-700">Escale Surprise</div>
-                            </li>
-                            <li class="flex items-start gap-4 pb-4 border-b border-gray-100 last:border-0">
-                                <div class="font-bold text-cantine-primary w-16 text-right">1er Avril</div>
-                                <div class="text-gray-700">Saveurs de Printemps</div>
-                            </li>
-                            <li class="flex items-start gap-4">
-                                <div class="font-bold text-cantine-primary w-16 text-right">6 Mai</div>
-                                <div class="text-gray-700">Spécial Méditerranée</div>
-                            </li>
-                        </ul>
-                    </div>
-
-                    <!-- Face B: Impact & QR -->
-                    <div class="bg-cantine-dark text-white rounded-xl shadow-lg p-8 relative overflow-hidden">
-                        <i class="fas fa-heart absolute top-4 right-4 text-6xl text-white opacity-5"></i>
-                        
-                        <h3 class="text-xl font-bold font-serif mb-4">Merci.</h3>
-                        <p class="text-gray-300 text-sm mb-6 leading-relaxed">
-                            En déjeunant ici aujourd'hui, vous avez contribué au financement de nos distributions alimentaires.
-                        </p>
-                        
-                        <div class="bg-white/10 rounded-lg p-4 flex items-center gap-4">
-                            <!-- Fake QR Code Icon -->
-                            <div class="bg-white p-2 rounded shrink-0">
-                                <i class="fas fa-qrcode text-4xl text-black"></i>
-                            </div>
-                            <div>
-                                <p class="font-bold text-sm text-white mb-1">Restons en contact</p>
-                                <p class="text-xs text-gray-300">Recevez le menu du mois prochain par email (1x par mois).</p>
-                                <a href="#" class="text-cantine-primary text-xs hover:text-white mt-1 inline-block underline">S'inscrire à la newsletter</a>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Bouton Réservation Rapide -->
-                    <div class="text-center mt-4">
-                        <a href="#reservation" class="text-cantine-primary font-bold hover:underline">
-                            Ce menu vous tente ? Réservez votre table <i class="fas fa-arrow-down ml-1"></i>
-                        </a>
-                    </div>
-                </div>
-            </div>
+    <section id="mission" class="section alt">
+      <div class="container">
+        <div class="section-heading">
+          <h2>Notre mission</h2>
+          <p>Un repas partagé qui finance des actions locales et renforce le lien social.</p>
         </div>
+        <div class="cards">
+          <article class="card">
+            <h3>Aide alimentaire</h3>
+            <p>Les bénéfices soutiennent directement nos distributions mensuelles.</p>
+          </article>
+          <article class="card">
+            <h3>Noël solidaire</h3>
+            <p>Chaque année, nous organisons un repas festif pour les familles locales.</p>
+          </article>
+          <article class="card">
+            <h3>Lien social</h3>
+            <p>La Cantine est un lieu de rencontres intergénérationnelles et inclusives.</p>
+          </article>
+        </div>
+      </div>
     </section>
 
-    <!-- 5. MODULE DE RÉSERVATION -->
-    <section id="reservation" class="py-20 bg-cantine-light border-y border-orange-100">
-        <div class="container mx-auto px-4 max-w-4xl">
-            <div class="text-center mb-12">
-                <h2 class="text-3xl md:text-4xl font-serif text-cantine-secondary mb-4">Réservez votre table</h2>
-                <p class="text-lg text-gray-700 max-w-2xl mx-auto mb-6">
-                    Assurez votre place pour notre prochain voyage culinaire. Les réservations nous aident à limiter le gaspillage alimentaire en prévoyant les justes quantités.
-                </p>
-                
-                <div class="bg-white border-l-4 border-cantine-primary p-4 rounded shadow-sm inline-block text-left mx-auto max-w-2xl">
-                    <div class="flex gap-4">
-                        <div class="text-cantine-primary text-xl"><i class="fas fa-info-circle"></i></div>
-                        <div>
-                            <p class="text-sm text-gray-600">
-                                <strong>Prochain repas :</strong> Mercredi 4 février, à la Salle du Raisin.
-                            </p>
-                            <p class="text-sm text-gray-600">
-                                <strong>Paiement :</strong> Le paiement s'effectue sur place (Espèces ou Twint).
-                            </p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="bg-white rounded-2xl shadow-xl p-8 md:p-10">
-                <!-- Message de succès -->
-                <div id="reservation-success" class="hidden-section text-center py-12">
-                    <div class="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-6 text-cantine-success text-3xl">
-                        <i class="fas fa-check"></i>
-                    </div>
-                    <h3 class="text-2xl font-serif text-cantine-secondary mb-4">Merci !</h3>
-                    <p class="text-lg text-gray-600 mb-6">
-                        Votre demande a bien été reçue. Vous recevrez un email de confirmation sous peu.<br>
-                        Nous avons hâte de vous recevoir à la Salle du Raisin.
-                    </p>
-                    <button onclick="resetForm()" class="text-cantine-primary font-bold hover:underline">Faire une autre réservation</button>
-                </div>
-
-                <!-- Formulaire -->
-                <form id="reservation-form" onsubmit="handleReservation(event)" class="space-y-8">
-                    <div>
-                        <h3 class="text-xl font-serif text-gray-800 border-b pb-2 mb-4">Vos Coordonnées</h3>
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                            <div>
-                                <label class="block text-sm font-bold text-gray-700 mb-2">Nom et Prénom <span class="text-red-500">*</span></label>
-                                <input type="text" required class="w-full border border-gray-300 rounded-lg py-3 px-4 focus:outline-none focus:ring-2 focus:ring-cantine-primary" placeholder="Jean Dupont">
-                            </div>
-                            <div>
-                                <label class="block text-sm font-bold text-gray-700 mb-2">Adresse Email <span class="text-red-500">*</span></label>
-                                <input type="email" required class="w-full border border-gray-300 rounded-lg py-3 px-4 focus:outline-none focus:ring-2 focus:ring-cantine-primary" placeholder="jean@exemple.com">
-                            </div>
-                            <div class="md:col-span-2">
-                                <label class="block text-sm font-bold text-gray-700 mb-2">Numéro de téléphone <span class="text-red-500">*</span></label>
-                                <input type="tel" required class="w-full border border-gray-300 rounded-lg py-3 px-4 focus:outline-none focus:ring-2 focus:ring-cantine-primary" placeholder="079 123 45 67">
-                            </div>
-                        </div>
-                    </div>
-
-                    <div>
-                        <h3 class="text-xl font-serif text-gray-800 border-b pb-2 mb-4">Votre Réservation</h3>
-                        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                            <div>
-                                <label class="block text-sm font-bold text-gray-700 mb-2">Date</label>
-                                <input type="text" value="Mercredi 4 février 2026" readonly class="w-full bg-gray-100 text-gray-600 border border-gray-300 rounded-lg py-3 px-4 cursor-not-allowed">
-                            </div>
-                            <div>
-                                <label class="block text-sm font-bold text-gray-700 mb-2">Personnes <span class="text-red-500">*</span></label>
-                                <input type="number" min="1" max="20" value="1" required class="w-full border border-gray-300 rounded-lg py-3 px-4 focus:outline-none focus:ring-2 focus:ring-cantine-primary">
-                            </div>
-                            <div>
-                                <label class="block text-sm font-bold text-gray-700 mb-2">Arrivée <span class="text-red-500">*</span></label>
-                                <div class="relative">
-                                    <select required class="w-full border border-gray-300 rounded-lg py-3 px-4 focus:outline-none focus:ring-2 focus:ring-cantine-primary appearance-none bg-white">
-                                        <option value="" disabled selected>Choisir l'heure</option>
-                                        <option value="11:45">11h45</option>
-                                        <option value="12:00">12h00</option>
-                                        <option value="12:15">12h15</option>
-                                        <option value="12:30">12h30</option>
-                                        <option value="13:00">13h00</option>
-                                    </select>
-                                    <div class="absolute inset-y-0 right-0 flex items-center px-2 pointer-events-none text-gray-500">
-                                        <i class="fas fa-chevron-down text-xs"></i>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div>
-                        <h3 class="text-xl font-serif text-gray-800 border-b pb-2 mb-4">Préférences & Remarques</h3>
-                        <div class="space-y-4">
-                            <div>
-                                <label class="block text-sm font-bold text-gray-700 mb-2">Régimes alimentaires ou allergies</label>
-                                <input type="text" class="w-full border border-gray-300 rounded-lg py-3 px-4 focus:outline-none focus:ring-2 focus:ring-cantine-primary" placeholder="Ex: Végétarien, sans gluten...">
-                            </div>
-                            <div>
-                                <label class="block text-sm font-bold text-gray-700 mb-2">Remarque pour l'équipe</label>
-                                <textarea rows="2" class="w-full border border-gray-300 rounded-lg py-3 px-4 focus:outline-none focus:ring-2 focus:ring-cantine-primary" placeholder="Ex: Besoin d'une chaise haute..."></textarea>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="pt-4">
-                        <button type="submit" class="w-full bg-cantine-primary hover:bg-orange-700 text-white font-bold py-4 rounded-lg shadow-lg transform active:scale-95 transition flex items-center justify-center gap-2">
-                            Confirmer ma réservation <i class="fas fa-paper-plane"></i>
-                        </button>
-                    </div>
-                </form>
-            </div>
+    <section id="avis" class="section">
+      <div class="container">
+        <div class="section-heading">
+          <h2>Avis des convives</h2>
+          <p>Recommandé par 100% des visiteurs.</p>
         </div>
+        <div class="testimonial">
+          <p>"Merci pour ce savoureux repas, le service impeccable et la bonne humeur. À très vite pour de nouvelles découvertes gastronomiques."</p>
+          <span>Aitor Ibarrola</span>
+        </div>
+      </div>
     </section>
 
-    <!-- 6. Section "Notre Impact" -->
-    <section id="mission" class="py-20 bg-stone-50">
-        <div class="container mx-auto px-4">
-            <div class="flex flex-col md:flex-row items-center gap-12">
-                <div class="md:w-1/2 order-2 md:order-1">
-                    <h2 class="text-3xl md:text-4xl font-serif text-cantine-secondary mb-6">Bien plus qu'un simple repas</h2>
-                    <p class="text-gray-600 mb-6 text-lg leading-relaxed">
-                        Manger à La Cantine, c'est faire un geste concret. L'intégralité des bénéfices de nos repas mensuels finance directement nos actions solidaires à Bussigny.
-                    </p>
-                    <p class="text-gray-600 mb-8 leading-relaxed">
-                        Grâce à votre soutien et votre fidélité en 2025, nous avons pu organiser un Noël mémorable pour les bénéficiaires de notre distribution alimentaire et continuer à aider ceux qui en ont le plus besoin. Votre assiette a du pouvoir.
-                    </p>
-                    <a href="#" class="inline-flex items-center text-cantine-primary font-bold hover:text-orange-700 transition gap-2 group">
-                        En savoir plus sur nos actions sociales
-                        <i class="fas fa-arrow-right transform group-hover:translate-x-1 transition"></i>
-                    </a>
-                </div>
-                <div class="md:w-1/2 order-1 md:order-2">
-                    <div class="relative">
-                        <div class="absolute top-4 left-4 w-full h-full border-2 border-cantine-primary rounded-2xl z-0"></div>
-                        <img src="https://images.unsplash.com/photo-1593113598332-cd288d649433?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" 
-                             alt="Distribution alimentaire et bénévoles" 
-                             class="relative z-10 rounded-2xl shadow-xl w-full">
-                    </div>
-                </div>
-            </div>
+    <section id="benevolat" class="section alt">
+      <div class="container">
+        <div class="section-heading">
+          <h2>Devenir bénévole</h2>
+          <p>Votre engagement fait la différence lors de chaque repas.</p>
         </div>
+        <div class="cards">
+          <article class="card">
+            <h3>Cuisine</h3>
+            <p>Préparation du menu avec l'équipe et transmission des recettes.</p>
+          </article>
+          <article class="card">
+            <h3>Service</h3>
+            <p>Accueil des convives, service en salle et convivialité.</p>
+          </article>
+          <article class="card">
+            <h3>Logistique</h3>
+            <p>Installation, rangement et coordination des espaces.</p>
+          </article>
+        </div>
+        <a class="button ghost" href="mailto:lacantine.bussigny@gmail.ch">Écrire à l'équipe</a>
+      </div>
     </section>
 
-    <!-- 7. Section "Devenir Bénévole" -->
-    <section id="benevole" class="py-20 bg-white">
-        <div class="container mx-auto px-4">
-            <!-- Intro Bénévole -->
-            <div class="text-center max-w-4xl mx-auto mb-16">
-                <h2 class="text-3xl md:text-4xl font-serif text-cantine-secondary mb-4">Rejoignez l'aventure La Cantine</h2>
-                <p class="text-xl text-cantine-primary font-serif italic mb-8">
-                    Donnez un peu de votre temps, recevez beaucoup de sourires.
-                </p>
-                <p class="text-gray-600 leading-relaxed text-lg">
-                    La Cantine, c'est avant tout une histoire d'équipe. Que ce soit pour éplucher des légumes dans la bonne humeur, dresser les tables ou accueillir nos convives, chaque coup de main est précieux. Rejoindre l'équipe de Nina et des autres bénévoles, c'est participer concrètement à la vie de Bussigny et soutenir nos actions de solidarité.
-                </p>
-            </div>
-
-            <!-- Grille Missions -->
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-16">
-                <!-- Mission 1 -->
-                <div class="bg-stone-50 p-6 rounded-xl hover:shadow-lg transition border border-stone-100 text-center group">
-                    <div class="w-16 h-16 bg-white rounded-full flex items-center justify-center mx-auto mb-4 text-cantine-primary text-2xl shadow-sm group-hover:scale-110 transition">
-                        <i class="fas fa-star"></i>
-                    </div>
-                    <h3 class="font-bold text-xl text-gray-800 mb-3">L'As des fourneaux</h3>
-                    <p class="text-gray-600 text-sm">
-                        Vous avez une recette de votre pays ou de votre enfance à partager ? Devenez le chef d'un jour et guidez l'équipe pour le menu du mois.
-                    </p>
-                </div>
-                <!-- Mission 2 -->
-                <div class="bg-stone-50 p-6 rounded-xl hover:shadow-lg transition border border-stone-100 text-center group">
-                    <div class="w-16 h-16 bg-white rounded-full flex items-center justify-center mx-auto mb-4 text-cantine-primary text-2xl shadow-sm group-hover:scale-110 transition">
-                        <i class="fas fa-carrot"></i>
-                    </div>
-                    <h3 class="font-bold text-xl text-gray-800 mb-3">Le Commis motivé</h3>
-                    <p class="text-gray-600 text-sm">
-                        Épluchage, découpe et préparation. C'est ici que les conversations sont les plus animées !
-                    </p>
-                </div>
-                <!-- Mission 3 -->
-                <div class="bg-stone-50 p-6 rounded-xl hover:shadow-lg transition border border-stone-100 text-center group">
-                    <div class="w-16 h-16 bg-white rounded-full flex items-center justify-center mx-auto mb-4 text-cantine-primary text-2xl shadow-sm group-hover:scale-110 transition">
-                        <i class="fas fa-heart"></i>
-                    </div>
-                    <h3 class="font-bold text-xl text-gray-800 mb-3">L'Accueil</h3>
-                    <p class="text-gray-600 text-sm">
-                        Si vous aimez le contact humain, aidez-nous à servir les plats et à faire en sorte que chacun se sente comme à la maison.
-                    </p>
-                </div>
-                <!-- Mission 4 -->
-                <div class="bg-stone-50 p-6 rounded-xl hover:shadow-lg transition border border-stone-100 text-center group">
-                    <div class="w-16 h-16 bg-white rounded-full flex items-center justify-center mx-auto mb-4 text-cantine-primary text-2xl shadow-sm group-hover:scale-110 transition">
-                        <i class="fas fa-people-carry-box"></i>
-                    </div>
-                    <h3 class="font-bold text-xl text-gray-800 mb-3">La Logistique</h3>
-                    <p class="text-gray-600 text-sm">
-                        Installation de la salle avant le repas ou rangement après le service. Une aide indispensable pour le bon déroulement de la journée.
-                    </p>
-                </div>
-            </div>
-
-            <!-- CTA Bénévole -->
-            <div class="bg-cantine-secondary rounded-2xl p-8 md:p-12 text-center text-white relative overflow-hidden">
-                <div class="absolute top-0 left-0 w-full h-full opacity-10 pointer-events-none">
-                    <i class="fas fa-utensils absolute top-10 left-10 text-6xl"></i>
-                    <i class="fas fa-carrot absolute bottom-10 right-10 text-6xl"></i>
-                </div>
-                
-                <h3 class="text-3xl font-serif mb-4 relative z-10">Prêt à enfiler le tablier ?</h3>
-                <div class="flex flex-col md:flex-row justify-center gap-4 relative z-10">
-                    <a href="mailto:lacantine.bussigny@gmail.ch" class="bg-white text-cantine-secondary font-bold py-3 px-8 rounded-full hover:bg-gray-100 transition shadow-lg flex items-center justify-center gap-2">
-                        <i class="fas fa-envelope"></i> Contacter l'équipe
-                    </a>
-                    <a href="tel:+41774737364" class="bg-transparent border-2 border-white text-white font-bold py-3 px-8 rounded-full hover:bg-white hover:text-cantine-secondary transition flex items-center justify-center gap-2">
-                        <i class="fas fa-phone"></i> 077 473 73 64
-                    </a>
-                </div>
-            </div>
+    <section id="reserver" class="section">
+      <div class="container">
+        <div class="section-heading">
+          <h2>Réserver une table</h2>
+          <p>Les réservations aident à prévoir les quantités et limiter le gaspillage.</p>
         </div>
+        <div class="contact-grid">
+          <div class="contact-info">
+            <h3>Coordonnées</h3>
+            <p>La Cantine Bussigny</p>
+            <p>Rue de Lausanne 3, 1030 Bussigny, Suisse</p>
+            <p>Téléphone : 077 473 73 64</p>
+            <p>Email : lacantine.bussigny@gmail.ch</p>
+            <p>Paiement sur place : Cash ou Twint</p>
+            <div class="map-wrapper">
+              <iframe title="Carte La Cantine Bussigny" src="https://www.google.com/maps?q=Rue%20de%20Lausanne%203%201030%20Bussigny&output=embed" loading="lazy"></iframe>
+            </div>
+          </div>
+          <form class="contact-form" action="https://formsubmit.co/lacantine.bussigny@gmail.ch" method="POST">
+            <input type="hidden" name="_next" value="https://lacantine-bussigny.github.io/merci.html">
+            <input type="hidden" name="_captcha" value="false">
+            <input type="text" name="_honey" class="hidden" tabindex="-1" autocomplete="off">
+
+            <label for="name">Nom et prénom</label>
+            <input id="name" name="name" type="text" required>
+
+            <label for="email">Email</label>
+            <input id="email" name="email" type="email" required>
+
+            <label for="phone">Téléphone</label>
+            <input id="phone" name="phone" type="tel" required>
+
+            <label for="guests">Nombre de personnes</label>
+            <input id="guests" name="guests" type="number" min="1" max="20" required>
+
+            <label for="note">Remarques</label>
+            <textarea id="note" name="note" rows="4"></textarea>
+
+            <button class="button" type="submit">Envoyer la réservation</button>
+          </form>
+        </div>
+      </div>
     </section>
+  </main>
 
-    <!-- 8. Section "Témoignages" -->
-    <section id="temoignages" class="py-20 bg-stone-50 border-t border-gray-100">
-        <div class="container mx-auto px-4 max-w-3xl text-center">
-            <h2 class="text-3xl font-serif text-cantine-secondary mb-12">Ils ont aimé l'expérience</h2>
-            
-            <div class="relative bg-white p-10 rounded-2xl shadow-[0_10px_40px_-10px_rgba(0,0,0,0.1)]">
-                <div class="text-cantine-primary text-4xl mb-6 opacity-30">
-                    <i class="fas fa-quote-left"></i>
-                </div>
-                <p class="text-xl md:text-2xl text-gray-700 italic mb-8 font-light leading-relaxed">
-                    "Merci pour ce savoureux repas, le service impeccable et la bonne humeur. Bonnes fêtes à toute l'équipe et à l'année prochaine pour de nouvelles découvertes gastronomiques."
-                </p>
-                
-                <div class="flex items-center justify-center gap-4">
-                    <div class="w-12 h-12 bg-gray-200 rounded-full flex items-center justify-center text-gray-500 font-bold">
-                        AI
-                    </div>
-                    <div class="text-left">
-                        <div class="font-bold text-gray-900">Aitor Ibarrola</div>
-                        <div class="text-sm text-gray-500">Visiteur fidèle</div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <div>
+        <p>La Cantine Bussigny</p>
+        <p>Association culinaire et solidaire.</p>
+      </div>
+      <div class="footer-links">
+        <a href="legales.html">Mentions légales</a>
+        <span>Copyright 2026</span>
+      </div>
+    </div>
+  </footer>
 
-    <!-- 9. Pied de page -->
-    <footer id="contact" class="bg-cantine-dark text-gray-300 py-16">
-        <div class="container mx-auto px-4">
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-12">
-                <!-- Brand -->
-                <div>
-                    <a href="#" class="flex items-center gap-2 text-2xl font-serif text-white font-bold mb-4">
-                        <i class="fas fa-utensils text-cantine-primary"></i>
-                        La Cantine
-                    </a>
-                    <p class="text-sm leading-relaxed mb-6">
-                        Association culinaire et solidaire œuvrant pour le lien social et l'entraide alimentaire à Bussigny.
-                    </p>
-                </div>
-
-                <!-- Adresse -->
-                <div>
-                    <h3 class="text-white font-bold text-lg mb-6">Nous trouver</h3>
-                    <address class="not-italic flex flex-col gap-3">
-                        <div class="flex gap-3">
-                            <i class="fas fa-map-pin text-cantine-primary mt-1"></i>
-                            <span>
-                                Rue de Lausanne 3<br>
-                                Bussigny, Suisse<br>
-                                (Salle du Raisin)
-                            </span>
-                        </div>
-                    </address>
-                </div>
-
-                <!-- Contact -->
-                <div>
-                    <h3 class="text-white font-bold text-lg mb-6">Contact</h3>
-                    <div class="flex flex-col gap-3">
-                        <a href="tel:+41774737364" class="flex gap-3 hover:text-white transition">
-                            <i class="fas fa-phone text-cantine-primary mt-1"></i>
-                            077 473 73 64
-                        </a>
-                        <a href="mailto:lacantine.bussigny@gmail.ch" class="flex gap-3 hover:text-white transition">
-                            <i class="fas fa-envelope text-cantine-primary mt-1"></i>
-                            lacantine.bussigny@gmail.ch
-                        </a>
-                    </div>
-                </div>
-
-                <!-- Navigation -->
-                <div>
-                    <h3 class="text-white font-bold text-lg mb-6">Liens Rapides</h3>
-                    <ul class="flex flex-col gap-2 text-sm">
-                        <li><a href="#benevole" class="hover:text-cantine-primary transition">Devenir Bénévoles</a></li>
-                        <li><a href="#" class="hover:text-cantine-primary transition">Mentions Légales</a></li>
-                        <li><a href="#" class="hover:text-cantine-primary transition">Politique de Confidentialité</a></li>
-                    </ul>
-                </div>
-            </div>
-
-            <div class="border-t border-gray-700 pt-8 text-center text-sm text-gray-500">
-                &copy; 2026 La Cantine. Tous droits réservés.
-            </div>
-        </div>
-    </footer>
-
-    <script>
-        // Gestion du menu mobile
-        function toggleMenu() {
-            const menu = document.getElementById('mobile-menu');
-            menu.classList.toggle('hidden');
-        }
-
-        // Gestion de la réservation
-        function handleReservation(event) {
-            event.preventDefault();
-            const form = document.getElementById('reservation-form');
-            const successMsg = document.getElementById('reservation-success');
-
-            form.style.opacity = '0';
-            setTimeout(() => {
-                form.classList.add('hidden-section');
-                successMsg.classList.remove('hidden-section');
-                successMsg.style.opacity = '0';
-                
-                document.getElementById('reservation').scrollIntoView({ behavior: 'smooth' });
-
-                setTimeout(() => {
-                    successMsg.style.transition = 'opacity 0.5s';
-                    successMsg.style.opacity = '1';
-                }, 50);
-            }, 300);
-        }
-
-        function resetForm() {
-            const form = document.getElementById('reservation-form');
-            const successMsg = document.getElementById('reservation-success');
-            
-            form.reset();
-            successMsg.classList.add('hidden-section');
-            form.classList.remove('hidden-section');
-            setTimeout(() => {
-                form.style.transition = 'opacity 0.5s';
-                form.style.opacity = '1';
-            }, 50);
-        }
-    </script>
+  <script src="app.js"></script>
 </body>
 </html>

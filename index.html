@@ -3,31 +3,570 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>La Cantine Bussigny - Repas communautaires</title>
-  <meta name="description" content="La Cantine Bussigny organise des repas communautaires solidaires. Découvrez le menu, l'agenda et réservez votre place.">
-  <meta name="keywords" content="La Cantine Bussigny, repas communautaires, association, solidarité, réservation">
+  <title>La Cantine Bussigny - Repas communautaires solidaires</title>
+  <meta name="description" content="La Cantine Bussigny organise des repas communautaires solidaires chaque mois. Découvrez nos menus, réservez votre place et soutenez des actions locales.">
+  <meta name="keywords" content="La Cantine Bussigny, repas communautaires, solidarité, Bussigny, association, bénévolat, réservation">
   <meta name="author" content="La Cantine Bussigny">
-  <meta property="og:title" content="La Cantine Bussigny - Repas communautaires">
+  <meta property="og:title" content="La Cantine Bussigny - Repas communautaires solidaires">
   <meta property="og:description" content="Repas communautaires solidaires à Bussigny. Réservez votre place et soutenez nos actions locales.">
   <meta property="og:image" content="https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=1200&q=80">
   <meta property="og:type" content="website">
+  <meta property="og:url" content="https://lacantine-bussigny.github.io/">
   <link rel="manifest" href="manifest.json">
-  <link rel="icon" href="https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=64&q=80" type="image/png">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🍽️</text></svg>">
+  <link rel="icon" type="image/png" href="https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=64&q=80">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&family=Playfair+Display:wght@500;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css">
+  <style>
+    /* Variables CSS */
+    :root {
+      --primary-color: #2a6e3f;
+      --primary-dark: #1e4f2c;
+      --secondary-color: #d4a55e;
+      --light-color: #f8f9fa;
+      --dark-color: #343a40;
+      --gray-color: #6c757d;
+      --light-gray: #e9ecef;
+      --transition: all 0.3s ease;
+      --shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+      --shadow-hover: 0 8px 24px rgba(0, 0, 0, 0.12);
+      --border-radius: 8px;
+    }
+
+    /* Reset et base */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Lato', sans-serif;
+      line-height: 1.6;
+      color: var(--dark-color);
+      overflow-x: hidden;
+    }
+
+    h1, h2, h3, h4 {
+      font-family: 'Playfair Display', serif;
+      font-weight: 700;
+      line-height: 1.3;
+      margin-bottom: 1rem;
+    }
+
+    h1 {
+      font-size: clamp(2.5rem, 5vw, 3.5rem);
+    }
+
+    h2 {
+      font-size: clamp(2rem, 4vw, 2.8rem);
+    }
+
+    h3 {
+      font-size: clamp(1.5rem, 3vw, 1.8rem);
+    }
+
+    p {
+      margin-bottom: 1rem;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    img {
+      max-width: 100%;
+      height: auto;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 1.5rem;
+    }
+
+    .section {
+      padding: 5rem 0;
+    }
+
+    .section.alt {
+      background-color: var(--light-gray);
+    }
+
+    .section-heading {
+      text-align: center;
+      margin-bottom: 3rem;
+    }
+
+    .section-heading p {
+      font-size: 1.2rem;
+      color: var(--gray-color);
+      max-width: 700px;
+      margin: 0 auto;
+    }
+
+    /* Header */
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      background-color: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(10px);
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      padding: 1rem 0;
+    }
+
+    .header-inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: var(--primary-color);
+      transition: var(--transition);
+    }
+
+    .logo:hover {
+      color: var(--primary-dark);
+    }
+
+    .burger {
+      display: none;
+      background: none;
+      border: none;
+      cursor: pointer;
+      width: 30px;
+      height: 30px;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 0;
+      z-index: 1001;
+    }
+
+    .burger span {
+      display: block;
+      height: 3px;
+      width: 100%;
+      background-color: var(--primary-color);
+      transition: var(--transition);
+      border-radius: 3px;
+    }
+
+    .burger.active span:nth-child(1) {
+      transform: translateY(11px) rotate(45deg);
+    }
+
+    .burger.active span:nth-child(2) {
+      opacity: 0;
+    }
+
+    .burger.active span:nth-child(3) {
+      transform: translateY(-11px) rotate(-45deg);
+    }
+
+    .nav {
+      display: flex;
+      gap: 2rem;
+    }
+
+    .nav a {
+      position: relative;
+      padding: 0.5rem 0;
+      font-weight: 500;
+      transition: var(--transition);
+    }
+
+    .nav a:hover {
+      color: var(--primary-color);
+    }
+
+    .nav a::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background-color: var(--primary-color);
+      transition: var(--transition);
+    }
+
+    .nav a:hover::after {
+      width: 100%;
+    }
+
+    /* Hero */
+    .hero {
+      position: relative;
+      min-height: 90vh;
+      display: flex;
+      align-items: center;
+      background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.4)), 
+                  url('https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=1600&q=80') center/cover no-repeat;
+      color: white;
+      text-align: center;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      max-width: 800px;
+    }
+
+    .hero h1 {
+      margin-bottom: 1.5rem;
+      text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+    }
+
+    .hero p {
+      font-size: 1.3rem;
+      margin-bottom: 2.5rem;
+      text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+    }
+
+    /* Boutons */
+    .button {
+      display: inline-block;
+      background-color: var(--primary-color);
+      color: white;
+      padding: 0.9rem 2.5rem;
+      border-radius: var(--border-radius);
+      font-weight: 600;
+      border: none;
+      cursor: pointer;
+      transition: var(--transition);
+      font-size: 1.1rem;
+      text-align: center;
+    }
+
+    .button:hover {
+      background-color: var(--primary-dark);
+      transform: translateY(-3px);
+      box-shadow: var(--shadow-hover);
+    }
+
+    .button.ghost {
+      background-color: transparent;
+      border: 2px solid var(--primary-color);
+      color: var(--primary-color);
+    }
+
+    .button.ghost:hover {
+      background-color: var(--primary-color);
+      color: white;
+    }
+
+    /* Cards */
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+      margin-bottom: 2rem;
+    }
+
+    .card {
+      background: white;
+      border-radius: var(--border-radius);
+      padding: 2rem;
+      box-shadow: var(--shadow);
+      transition: var(--transition);
+      height: 100%;
+    }
+
+    .card:hover {
+      transform: translateY(-10px);
+      box-shadow: var(--shadow-hover);
+    }
+
+    .card.highlight {
+      border-top: 5px solid var(--secondary-color);
+    }
+
+    .card.muted {
+      opacity: 0.8;
+    }
+
+    .card h3 {
+      color: var(--primary-color);
+      margin-bottom: 1rem;
+    }
+
+    .card-status {
+      display: inline-block;
+      padding: 0.3rem 0.8rem;
+      background-color: var(--light-color);
+      border-radius: 20px;
+      font-size: 0.9rem;
+      margin-bottom: 1rem;
+      font-weight: 600;
+    }
+
+    /* Témoignage */
+    .testimonial {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 3rem;
+      background-color: white;
+      border-radius: var(--border-radius);
+      box-shadow: var(--shadow);
+      text-align: center;
+      position: relative;
+    }
+
+    .testimonial p {
+      font-size: 1.3rem;
+      font-style: italic;
+      margin-bottom: 2rem;
+      position: relative;
+    }
+
+    .testimonial p::before,
+    .testimonial p::after {
+      content: '"';
+      font-size: 3rem;
+      color: var(--secondary-color);
+      position: absolute;
+      opacity: 0.3;
+    }
+
+    .testimonial p::before {
+      top: -1.5rem;
+      left: -1rem;
+    }
+
+    .testimonial p::after {
+      bottom: -2.5rem;
+      right: -1rem;
+    }
+
+    .testimonial span {
+      font-weight: 700;
+      color: var(--primary-color);
+    }
+
+    /* Formulaire de réservation */
+    .contact-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 3rem;
+    }
+
+    .contact-info h3 {
+      margin-bottom: 1.5rem;
+      color: var(--primary-color);
+    }
+
+    .contact-info p {
+      margin-bottom: 0.8rem;
+    }
+
+    .map-wrapper {
+      margin-top: 2rem;
+      border-radius: var(--border-radius);
+      overflow: hidden;
+      box-shadow: var(--shadow);
+    }
+
+    .map-wrapper iframe {
+      width: 100%;
+      height: 250px;
+      border: none;
+      display: block;
+    }
+
+    .contact-form {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .contact-form label {
+      margin-bottom: 0.5rem;
+      font-weight: 600;
+    }
+
+    .contact-form input,
+    .contact-form textarea,
+    .contact-form select {
+      margin-bottom: 1.5rem;
+      padding: 0.9rem;
+      border: 1px solid #ddd;
+      border-radius: var(--border-radius);
+      font-family: 'Lato', sans-serif;
+      font-size: 1rem;
+      transition: var(--transition);
+    }
+
+    .contact-form input:focus,
+    .contact-form textarea:focus,
+    .contact-form select:focus {
+      outline: none;
+      border-color: var(--primary-color);
+      box-shadow: 0 0 0 3px rgba(42, 110, 63, 0.2);
+    }
+
+    .hidden {
+      display: none;
+    }
+
+    /* Footer */
+    .site-footer {
+      background-color: var(--dark-color);
+      color: white;
+      padding: 3rem 0;
+    }
+
+    .footer-inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 2rem;
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 2rem;
+    }
+
+    .footer-links a {
+      transition: var(--transition);
+    }
+
+    .footer-links a:hover {
+      color: var(--secondary-color);
+    }
+
+    /* Animations */
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .fade-in {
+      animation: fadeIn 0.8s ease-out forwards;
+    }
+
+    /* Responsive */
+    @media (max-width: 992px) {
+      .section {
+        padding: 4rem 0;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .burger {
+        display: flex;
+      }
+
+      .nav {
+        position: fixed;
+        top: 0;
+        right: -100%;
+        width: 70%;
+        height: 100vh;
+        background-color: white;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 2rem;
+        transition: var(--transition);
+        box-shadow: -5px 0 15px rgba(0, 0, 0, 0.1);
+      }
+
+      .nav.active {
+        right: 0;
+      }
+
+      .hero {
+        min-height: 80vh;
+      }
+
+      .cards {
+        grid-template-columns: 1fr;
+      }
+
+      .contact-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .footer-inner {
+        flex-direction: column;
+        text-align: center;
+      }
+
+      .footer-links {
+        flex-direction: column;
+        gap: 1rem;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .section {
+        padding: 3rem 0;
+      }
+
+      .testimonial {
+        padding: 2rem 1.5rem;
+      }
+
+      .button {
+        width: 100%;
+        padding: 1rem;
+      }
+    }
+
+    /* Accessibilité */
+    .sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border: 0;
+    }
+
+    :focus {
+      outline: 3px solid var(--primary-color);
+      outline-offset: 3px;
+    }
+
+    /* Performance optimisations */
+    img[loading="lazy"] {
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+
+    img[loading="lazy"].loaded {
+      opacity: 1;
+    }
+  </style>
 </head>
 <body>
+  <a href="#main-content" class="sr-only">Aller au contenu principal</a>
+  
   <header class="site-header">
     <div class="container header-inner">
-      <a class="logo" href="#accueil">La Cantine</a>
+      <a class="logo" href="#accueil" aria-label="La Cantine - Retour à l'accueil">La Cantine</a>
       <button class="burger" type="button" aria-label="Ouvrir le menu" aria-expanded="false" aria-controls="primary-nav">
         <span></span>
         <span></span>
         <span></span>
       </button>
-      <nav id="primary-nav" class="nav">
+      <nav id="primary-nav" class="nav" aria-label="Navigation principale">
         <a href="#accueil">Accueil</a>
         <a href="#agenda">Agenda</a>
         <a href="#mission">Mission</a>
@@ -38,10 +577,9 @@
     </div>
   </header>
 
-  <main>
+  <main id="main-content">
     <section id="accueil" class="hero">
-      <div class="hero-overlay"></div>
-      <div class="container hero-content">
+      <div class="container hero-content fade-in">
         <h1>Le monde dans votre assiette, la solidarité au cœur de Bussigny.</h1>
         <p>Chaque premier mercredi du mois, La Cantine Bussigny propose un repas communautaire chaleureux, à prix libre et conscient.</p>
         <a class="button" href="#reserver">Réserver une table</a>
@@ -55,21 +593,25 @@
           <p>Prix libre et conscient (15-20 CHF) - Cash ou Twint.</p>
         </div>
         <div class="cards">
-          <article class="card highlight">
+          <article class="card highlight fade-in">
             <h3>Mercredi 4 février</h3>
             <p class="card-status">Ouvert aux réservations</p>
             <p><strong>Destination :</strong> Algérie</p>
             <p><strong>Plat :</strong> Berkoukes traditionnel</p>
+            <p><strong>Horaires :</strong> 19h00 - 22h00</p>
+            <a class="button" href="#reserver" style="margin-top: 1rem; display: inline-block;">Réserver</a>
           </article>
-          <article class="card muted">
+          <article class="card muted fade-in" style="animation-delay: 0.1s">
             <h3>Mercredi 4 mars</h3>
             <p class="card-status">Bientôt</p>
             <p>Programme en préparation.</p>
+            <p><em>Thème à annoncer</em></p>
           </article>
-          <article class="card muted">
+          <article class="card muted fade-in" style="animation-delay: 0.2s">
             <h3>Mercredi 1er avril</h3>
             <p class="card-status">Bientôt</p>
             <p>Programme en préparation.</p>
+            <p><em>Thème à annoncer</em></p>
           </article>
         </div>
       </div>
@@ -82,17 +624,17 @@
           <p>Un repas partagé qui finance des actions locales et renforce le lien social.</p>
         </div>
         <div class="cards">
-          <article class="card">
+          <article class="card fade-in">
             <h3>Aide alimentaire</h3>
-            <p>Les bénéfices soutiennent directement nos distributions mensuelles.</p>
+            <p>Les bénéfices soutiennent directement nos distributions mensuelles de nourriture aux familles dans le besoin.</p>
           </article>
-          <article class="card">
+          <article class="card fade-in" style="animation-delay: 0.1s">
             <h3>Noël solidaire</h3>
-            <p>Chaque année, nous organisons un repas festif pour les familles locales.</p>
+            <p>Chaque année, nous organisons un repas festif gratuit pour plus de 100 familles locales.</p>
           </article>
-          <article class="card">
+          <article class="card fade-in" style="animation-delay: 0.2s">
             <h3>Lien social</h3>
-            <p>La Cantine est un lieu de rencontres intergénérationnelles et inclusives.</p>
+            <p>La Cantine est un lieu de rencontres intergénérationnelles et inclusives qui brise l'isolement.</p>
           </article>
         </div>
       </div>
@@ -104,9 +646,12 @@
           <h2>Avis des convives</h2>
           <p>Recommandé par 100% des visiteurs.</p>
         </div>
-        <div class="testimonial">
+        <div class="testimonial fade-in">
           <p>"Merci pour ce savoureux repas, le service impeccable et la bonne humeur. À très vite pour de nouvelles découvertes gastronomiques."</p>
           <span>Aitor Ibarrola</span>
+        </div>
+        <div style="text-align: center; margin-top: 2rem;">
+          <a href="#reserver" class="button">Participer au prochain repas</a>
         </div>
       </div>
     </section>
@@ -118,20 +663,22 @@
           <p>Votre engagement fait la différence lors de chaque repas.</p>
         </div>
         <div class="cards">
-          <article class="card">
+          <article class="card fade-in">
             <h3>Cuisine</h3>
-            <p>Préparation du menu avec l'équipe et transmission des recettes.</p>
+            <p>Préparation du menu avec l'équipe et transmission des recettes. Partagez vos talents culinaires!</p>
           </article>
-          <article class="card">
+          <article class="card fade-in" style="animation-delay: 0.1s">
             <h3>Service</h3>
-            <p>Accueil des convives, service en salle et convivialité.</p>
+            <p>Accueil des convives, service en salle et convivialité. Soyz le sourire de la Cantine!</p>
           </article>
-          <article class="card">
+          <article class="card fade-in" style="animation-delay: 0.2s">
             <h3>Logistique</h3>
-            <p>Installation, rangement et coordination des espaces.</p>
+            <p>Installation, rangement et coordination des espaces. L'organisation est essentielle!</p>
           </article>
         </div>
-        <a class="button ghost" href="mailto:lacantine.bussigny@gmail.ch">Écrire à l'équipe</a>
+        <div style="text-align: center; margin-top: 2rem;">
+          <a class="button ghost" href="mailto:lacantine.bussigny@gmail.ch?subject=Devenir bénévole">Écrire à l'équipe</a>
+        </div>
       </div>
     </section>
 
@@ -142,38 +689,49 @@
           <p>Les réservations aident à prévoir les quantités et limiter le gaspillage.</p>
         </div>
         <div class="contact-grid">
-          <div class="contact-info">
+          <div class="contact-info fade-in">
             <h3>Coordonnées</h3>
-            <p>La Cantine Bussigny</p>
+            <p><strong>La Cantine Bussigny</strong></p>
             <p>Rue de Lausanne 3, 1030 Bussigny, Suisse</p>
-            <p>Téléphone : 077 473 73 64</p>
-            <p>Email : lacantine.bussigny@gmail.ch</p>
-            <p>Paiement sur place : Cash ou Twint</p>
+            <p><strong>Téléphone :</strong> 077 473 73 64</p>
+            <p><strong>Email :</strong> lacantine.bussigny@gmail.ch</p>
+            <p><strong>Paiement sur place :</strong> Cash ou Twint</p>
+            <p><strong>Horaires des repas :</strong> 19h00 - 22h00</p>
             <div class="map-wrapper">
-              <iframe title="Carte La Cantine Bussigny" src="https://www.google.com/maps?q=Rue%20de%20Lausanne%203%201030%20Bussigny&output=embed" loading="lazy"></iframe>
+              <iframe title="Carte La Cantine Bussigny" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2744.556103377555!2d6.554587315599487!3d46.55167547912815!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x478c31d0cb32f1e5%3A0x5f17e3c5c0e7e4c6!2sRue%20de%20Lausanne%203%2C%201030%20Bussigny!5e0!3m2!1sfr!2sch!4v1645731234567!5m2!1sfr!2sch" loading="lazy" allowfullscreen></iframe>
             </div>
           </div>
-          <form class="contact-form" action="https://formsubmit.co/lacantine.bussigny@gmail.ch" method="POST">
+          <form class="contact-form fade-in" action="https://formsubmit.co/lacantine.bussigny@gmail.ch" method="POST">
             <input type="hidden" name="_next" value="https://lacantine-bussigny.github.io/merci.html">
             <input type="hidden" name="_captcha" value="false">
             <input type="text" name="_honey" class="hidden" tabindex="-1" autocomplete="off">
+            <input type="hidden" name="_subject" value="Nouvelle réservation La Cantine Bussigny">
 
-            <label for="name">Nom et prénom</label>
+            <label for="name">Nom et prénom *</label>
             <input id="name" name="name" type="text" required>
 
-            <label for="email">Email</label>
+            <label for="email">Email *</label>
             <input id="email" name="email" type="email" required>
 
-            <label for="phone">Téléphone</label>
+            <label for="phone">Téléphone *</label>
             <input id="phone" name="phone" type="tel" required>
 
-            <label for="guests">Nombre de personnes</label>
+            <label for="date">Date souhaitée *</label>
+            <select id="date" name="date" required>
+              <option value="">Sélectionnez une date</option>
+              <option value="2026-02-04">Mercredi 4 février 2026</option>
+              <option value="2026-03-04">Mercredi 4 mars 2026</option>
+              <option value="2026-04-01">Mercredi 1er avril 2026</option>
+            </select>
+
+            <label for="guests">Nombre de personnes *</label>
             <input id="guests" name="guests" type="number" min="1" max="20" required>
 
-            <label for="note">Remarques</label>
-            <textarea id="note" name="note" rows="4"></textarea>
+            <label for="note">Remarques (allergies alimentaires, etc.)</label>
+            <textarea id="note" name="note" rows="4" placeholder="Avez-vous des allergies ou des préférences alimentaires?"></textarea>
 
             <button class="button" type="submit">Envoyer la réservation</button>
+            <p style="font-size: 0.9rem; margin-top: 1rem; color: var(--gray-color);">* Champs obligatoires</p>
           </form>
         </div>
       </div>
@@ -183,16 +741,110 @@
   <footer class="site-footer">
     <div class="container footer-inner">
       <div>
-        <p>La Cantine Bussigny</p>
+        <p style="font-size: 1.2rem; font-weight: 700; margin-bottom: 0.5rem;">La Cantine Bussigny</p>
         <p>Association culinaire et solidaire.</p>
+        <p style="margin-top: 1rem;">© 2026 - Tous droits réservés</p>
       </div>
       <div class="footer-links">
         <a href="legales.html">Mentions légales</a>
-        <span>Copyright 2026</span>
+        <a href="#reserver">Réserver</a>
+        <a href="mailto:lacantine.bussigny@gmail.ch">Contact</a>
       </div>
     </div>
   </footer>
 
-  <script src="app.js"></script>
+  <script>
+    // Menu mobile
+    const burger = document.querySelector('.burger');
+    const nav = document.querySelector('.nav');
+    const navLinks = document.querySelectorAll('.nav a');
+    
+    burger.addEventListener('click', () => {
+      burger.classList.toggle('active');
+      nav.classList.toggle('active');
+      burger.setAttribute('aria-expanded', burger.classList.contains('active'));
+    });
+    
+    // Fermer le menu en cliquant sur un lien
+    navLinks.forEach(link => {
+      link.addEventListener('click', () => {
+        burger.classList.remove('active');
+        nav.classList.remove('active');
+        burger.setAttribute('aria-expanded', 'false');
+      });
+    });
+    
+    // Lazy loading des images
+    document.addEventListener('DOMContentLoaded', function() {
+      const lazyImages = document.querySelectorAll('img[loading="lazy"]');
+      
+      if ('IntersectionObserver' in window) {
+        const imageObserver = new IntersectionObserver((entries, observer) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              const img = entry.target;
+              img.classList.add('loaded');
+              observer.unobserve(img);
+            }
+          });
+        });
+        
+        lazyImages.forEach(img => imageObserver.observe(img));
+      } else {
+        // Fallback pour les anciens navigateurs
+        lazyImages.forEach(img => {
+          img.classList.add('loaded');
+        });
+      }
+    });
+    
+    // Animation au défilement
+    const fadeElements = document.querySelectorAll('.fade-in');
+    
+    const fadeObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.style.opacity = '1';
+          entry.target.style.transform = 'translateY(0)';
+        }
+      });
+    }, {
+      threshold: 0.1
+    });
+    
+    fadeElements.forEach(el => {
+      el.style.opacity = '0';
+      el.style.transform = 'translateY(20px)';
+      el.style.transition = 'opacity 0.8s ease, transform 0.8s ease';
+      fadeObserver.observe(el);
+    });
+    
+    // Validation du formulaire
+    const form = document.querySelector('.contact-form');
+    if (form) {
+      form.addEventListener('submit', function(e) {
+        const phone = document.getElementById('phone');
+        const phoneRegex = /^[\+]?[0-9\s\-\(\)]{10,}$/;
+        
+        if (!phoneRegex.test(phone.value.replace(/\s/g, ''))) {
+          alert('Veuillez entrer un numéro de téléphone valide.');
+          phone.focus();
+          e.preventDefault();
+          return false;
+        }
+        
+        const guests = document.getElementById('guests');
+        if (guests.value < 1 || guests.value > 20) {
+          alert('Le nombre de personnes doit être entre 1 et 20.');
+          guests.focus();
+          e.preventDefault();
+          return false;
+        }
+        
+        // Soumission réussie
+        console.log('Formulaire validé, envoi en cours...');
+      });
+    }
+  </script>
 </body>
 </html>

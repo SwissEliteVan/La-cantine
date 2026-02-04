@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agenda - La Cantine Bussigny</title>
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header>
+        <nav class="navbar">
+            <div class="logo">La Cantine</div>
+            <ul class="nav-links">
+                <li><a href="index.html">Accueil</a></li>
+                <li><a href="agenda.html" class="active">Agenda & Menus</a></li>
+                <li><a href="mission.html">Notre Mission</a></li>
+                <li><a href="benevole.html">Bénévolat</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <li><a href="contact.html#reservation" class="btn-reserve">Réserver</a></li>
+            </ul>
+            <div class="burger">
+                <div class="line1"></div>
+                <div class="line2"></div>
+                <div class="line3"></div>
+            </div>
+        </nav>
+    </header>
+
+    <section class="container">
+        <h1>L'Agenda des Saveurs 2026</h1>
+        <p>Nous vous donnons rendez-vous chaque premier mercredi du mois à la Salle du Raisin.</p>
+        
+        <br>
+        
+        <div class="card-grid">
+            <div class="card">
+                <div class="card-content">
+                    <span class="card-date">Mercredi 4 Février</span>
+                    <h3>Algérie</h3>
+                    <p>Au menu : Berkoukes traditionnel, Salade Méchouia et Thé à la menthe.</p>
+                    <br>
+                    <a href="contact.html#reservation" class="btn-reserve">Réserver</a>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-content">
+                    <span class="card-date">Mercredi 4 Mars</span>
+                    <h3>Destination Surprise</h3>
+                    <p>Le thème sera dévoilé prochainement. Restez connectés !</p>
+                    <br>
+                    <button disabled style="opacity: 0.5; cursor: not-allowed; padding: 10px; border:none;">Bientôt disponible</button>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-content">
+                    <span class="card-date">Mercredi 1 Avril</span>
+                    <h3>Destination Surprise</h3>
+                    <p>Le thème sera dévoilé prochainement.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="container" style="background-color: white;">
+        <h2>Tarifs & Infos</h2>
+        <p>Paiement sur place en espèces ou Twint.</p>
+        <ul style="margin-left: 20px; margin-top: 10px;">
+            <li>Menu complet : Prix fourchette basse €</li>
+            <li>Café / Thé : Offert</li>
+        </ul>
+    </section>
+
+    <footer>
+        <p>La Cantine Bussigny - Rue de Lausanne 3</p>
+        <small>&copy; 2026 La Cantine.</small>
+    </footer>
+
+    <script src="app.js"></script>
+</body>
+</html>
